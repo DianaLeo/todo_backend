@@ -13,6 +13,6 @@
 #
 
 #[START getting_started_sessions_runtime]
-runtime: nodejs10
+runtime: nodejs18
 #[END getting_started_sessions_runtime]
 
