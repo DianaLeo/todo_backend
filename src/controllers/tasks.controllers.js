@@ -1,15 +1,17 @@
 const Todo = require('../models/model');
 
 const getAllTasks = async (req, res) => {
+    console.log("Get All tasks");
     const { title, completed } = req.query;
     if (title) {
+        console.log("Trying await Todo.find(title)");
         try {
             const tasks = await Todo.find({ title: title });
             res.json(tasks);
             return;
         } catch (error) {
             res.status(500).json({
-                msg: error.message || "Something went wrong when retrieving todo tasks."
+                msg: "Something went wrong when retrieving todo tasks by title."
             })
             return;
         }
@@ -21,17 +23,19 @@ const getAllTasks = async (req, res) => {
             return;
         } catch (error) {
             res.status(500).json({
-                msg: error.message || "Something went wrong when retrieving todo tasks."
+                msg: "Something went wrong when retrieving todo tasks by completed."
             })
             return;
         }
     }
     try {
+        console.log("Trying await Todo.find()");
         const tasks = await Todo.find();
+        console.log("Tasks:",tasks);
         res.json(tasks);
     } catch (error) {
         res.status(500).json({
-            msg: error.message || "Something went wrong when retrieving todo tasks."
+            msg: "Something went wrong when retrieving todo tasks."
         })
     }
 }
